@@ -1,38 +1,3 @@
-const SIZE_SMALL = {
-  price: 50,
-  calories: 20
-};
-
-const SIZE_LARGE = {
-  price: 100,
-  calories: 40
-};
-
-const STUFFING_CHEESE = {
-  price: 10,
-  calories: 20
-};
-
-const STUFFING_SALAD = {
-  price: 20,
-  calories: 5
-};
-
-const STUFFING_POTATO = {
-  price: 15,
-  calories: 10
-};
-
-const TOPPING_SAUCE = {
-  price: 15,
-  calories: 0
-};
-
-const TOPPING_MAYO = {
-  price: 20,
-  calories: 5
-};
-
 class Hamburger {
   constructor(size, stuffing) {
     this.size = size;
@@ -40,24 +5,59 @@ class Hamburger {
     this.toppings = [];
   }
 
-  addTopping(topping) {
-    this.toppings.push(topping);
+  static SIZE_SMALL = {
+    price: 50,
+    calories: 20
+  };
+
+  static SIZE_LARGE = {
+    price: 100,
+    calories: 40
+  };
+
+  static STUFFING_CHEESE = {
+    price: 10,
+    calories: 20
+  };
+
+  static STUFFING_SALAD = {
+    price: 20,
+    calories: 5
+  };
+
+  static STUFFING_POTATO = {
+    price: 15,
+    calories: 10
+  };
+
+  static TOPPING_SAUCE = {
+    price: 15,
+    calories: 0
+  };
+
+  static TOPPING_MAYO = {
+    price: 20,
+    calories: 5
+  };
+
+  static addTopping(hamburger, topping) {
+    hamburger.toppings.push(topping);
   }
 
-  calculatePrice() {
-    let totalPrice = this.size.price + this.stuffing.price;
+  static calculatePrice(hamburger) {
+    let totalPrice = hamburger.size.price + hamburger.stuffing.price;
 
-    this.toppings.forEach(topping => {
+    hamburger.toppings.forEach(topping => {
       totalPrice += topping.price;
     });
 
     return totalPrice;
   }
 
-  calculateCalories() {
-    let totalCalories = this.size.calories + this.stuffing.calories;
+  static calculateCalories(hamburger) {
+    let totalCalories = hamburger.size.calories + hamburger.stuffing.calories;
 
-    this.toppings.forEach(topping => {
+    hamburger.toppings.forEach(topping => {
       totalCalories += topping.calories;
     });
 
@@ -66,12 +66,12 @@ class Hamburger {
 }
 
 
-var hamburger = new Hamburger(SIZE_SMALL, STUFFING_CHEESE);
-hamburger.addTopping(TOPPING_MAYO);
+var hamburger = new Hamburger(Hamburger.SIZE_SMALL, Hamburger.STUFFING_CHEESE);
+Hamburger.addTopping(hamburger, Hamburger.TOPPING_MAYO);
 
-console.log("Calories: " + hamburger.calculateCalories());
-console.log("Price: " + hamburger.calculatePrice());
+console.log("Calories: " + Hamburger.calculateCalories(hamburger));
+console.log("Price: " + Hamburger.calculatePrice(hamburger));
 
-hamburger.addTopping(TOPPING_SAUCE);
+Hamburger.addTopping(hamburger, Hamburger.TOPPING_SAUCE);
 
-console.log("Price with sauce: " + hamburger.calculatePrice());
+console.log("Price with sauce: " + Hamburger.calculatePrice(hamburger));
